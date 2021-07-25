@@ -3,7 +3,11 @@ const app = express();
 const morgan = require("morgan");
 const cors = require("cors");
 const mongoose = require("mongoose");
+const connectDB = require("./db");
 require("dotenv").config();
+
+// Connect Database
+connectDB();
 
 // Define routes
 const authRoutes = require("./routes/auth");
