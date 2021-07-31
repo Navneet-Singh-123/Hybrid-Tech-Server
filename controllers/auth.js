@@ -14,44 +14,38 @@ const ses = new AWS.SES({
   apiVersion: "2010-12-01",
 });
 
-exports.register = (req, res) => {
+exports.register = async (req, res) => {
   const { name, email, password } = req.body;
-
-  User.findOne({ email }).exec((err, user) => {
-    if (user) {
-      return res.status(400).json({
-        error: "User already exists",
-      });
+  const user = await User.findOne({ email });
+  if (user) {
+    return res.status(400).json({
+      error: "User already exists",
+    });
+  }
+  // Generate jwt token
+  const token = jwt.sign(
+    { name, email, password },
+    process.env.JWT_ACCOUNT_ACTIVATION,
+    {
+      expiresIn: "10m",
     }
-
-    // Generate jwt token
-    const token = jwt.sign(
-      { name, email, password },
-      process.env.JWT_ACCOUNT_ACTIVATION,
-      {
-        expiresIn: "10m",
-      }
-    );
-
-    // Send email
-    const params = registerEmailParams(email, token);
-
-    const sendEmailOnRegister = ses.sendEmail(params).promise();
-
-    sendEmailOnRegister
-      .then((data) => {
-        console.log("email submitted to SES", data);
-        res.json({
-          message: `Email has been sent to ${email}, follow the instructions to complete your registration`,
-        });
-      })
-      .catch((error) => {
-        console.log("ses email on register", error);
-        res.json({
-          message: "We could not verify your email, please try again",
-        });
+  );
+  // Send email
+  const params = registerEmailParams(email, token);
+  const sendEmailOnRegister = ses.sendEmail(params).promise();
+  sendEmailOnRegister
+    .then((data) => {
+      console.log("email submitted to SES", data);
+      res.json({
+        message: `Email has been sent to ${email}, follow the instructions to complete your registration`,
       });
-  });
+    })
+    .catch((error) => {
+      console.log("ses email on register", error);
+      res.json({
+        message: "We could not verify your email, please try again",
+      });
+    });
 };
 
 exports.registerActivate = (req, res) => {
@@ -94,4 +88,27 @@ exports.registerActivate = (req, res) => {
       });
     }
   );
+};
+
+exports.login = async (req, res) => {
+  const { email, password } = req.body;
+  const user = await User.findOne({ email });
+  if (!user) {
+    return res.status(400).json({
+      error: "User with this email does not exist, please register",
+    });
+  }
+  if (!user.authenticate(password)) {
+    return res.status(400).json({
+      error: "Email and password do not match",
+    });
+  }
+  const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
+    expiresIn: "7d",
+  });
+  const { _id, name, role } = user;
+  return res.json({
+    token,
+    user: { _id, name, email, role },
+  });
 };
