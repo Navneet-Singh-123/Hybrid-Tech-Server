@@ -2,7 +2,6 @@ const express = require("express");
 const app = express();
 const morgan = require("morgan");
 const cors = require("cors");
-const mongoose = require("mongoose");
 const connectDB = require("./db");
 require("dotenv").config();
 
@@ -12,6 +11,7 @@ connectDB();
 // Define routes
 const authRoutes = require("./routes/auth");
 const userRoutes = require("./routes/user");
+const categoryRoutes = require("./routes/category");
 
 // Middlewares: App
 app.use(morgan("dev"));
@@ -21,6 +21,7 @@ app.use(cors({ origin: process.env.CLIENT_URL }));
 // Middlewares: Routes
 app.use("/api", authRoutes);
 app.use("/api", userRoutes);
+app.use("/api", categoryRoutes);
 
 const port = process.env.PORT || 8000;
 

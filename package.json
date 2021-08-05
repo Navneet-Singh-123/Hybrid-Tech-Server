@@ -16,11 +16,14 @@
     "express": "^4.17.1",
     "express-jwt": "^6.0.0",
     "express-validator": "^6.12.1",
+    "formidable": "^1.2.2",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.21",
     "mongoose": "^5.13.3",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.12",
-    "shortid": "^2.2.16"
+    "shortid": "^2.2.16",
+    "slugify": "^1.6.0",
+    "uuid": "^3.3.2"
   }
 }
