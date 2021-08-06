@@ -12,6 +12,7 @@ connectDB();
 const authRoutes = require("./routes/auth");
 const userRoutes = require("./routes/user");
 const categoryRoutes = require("./routes/category");
+const linkRotues = require("./routes/link");
 
 // Middlewares: App
 app.use(morgan("dev"));
@@ -22,6 +23,7 @@ app.use(cors({ origin: process.env.CLIENT_URL }));
 app.use("/api", authRoutes);
 app.use("/api", userRoutes);
 app.use("/api", categoryRoutes);
+app.use("/api", linkRotues);
 
 const port = process.env.PORT || 8000;
 
