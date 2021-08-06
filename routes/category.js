@@ -21,8 +21,8 @@ const { runValidation } = require("../validators");
 // Routes
 router.post(
   "/category",
-  // categoryCreateValidator,
-  // runValidation,
+  categoryCreateValidator,
+  runValidation,
   requireSignin,
   adminMiddleware,
   create
