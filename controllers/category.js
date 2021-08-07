@@ -1,4 +1,5 @@
 const Category = require("../models/category");
+const Link = require("../models/link");
 const slugify = require("slugify");
 const formidable = require("formidable");
 const AWS = require("aws-sdk");
@@ -129,7 +130,38 @@ exports.list = async (req, res) => {
   }
 };
 
-exports.read = (req, res) => {};
+exports.read = async (req, res) => {
+  const { slug } = req.params;
+  let { limit, skip } = req.query;
+  console.log("Limit: ", limit, "Skip: ", skip);
+  limit = limit ? parseInt(limit) : 3;
+  skip = skip ? parseInt(skip) : 0; 
+
+  let category, links;
+  try {
+    category = await Category.findOne({ slug }).populate(
+      "postedBy",
+      "_id name username"
+    );
+  } catch (error) {
+    return res.status(400).json({
+      error: "Could not load category",
+    });
+  }
+  try {
+    links = await Link.find({ categories: category })
+      .populate("postedBy", "name username")
+      .populate("categories", "name")
+      .sort({ createdAt: -1 })
+      .limit(limit)
+      .skip(skip);
+  } catch (error) {
+    return res.status(400).json({
+      error: "Could not load links for this category",
+    });
+  }
+  return res.json({ category, links });
+};
 
 exports.update = (req, res) => {};
 

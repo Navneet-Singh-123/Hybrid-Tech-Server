@@ -3,7 +3,7 @@ const router = express.Router();
 
 // Controllers
 const { requireSignin, authMiddleware } = require("../controllers/auth");
-const { create, list, read, update, remove } = require("../controllers/link");
+const { create, list, read, update, remove, clickCount} = require("../controllers/link");
 
 // Validators
 const {
@@ -33,6 +33,7 @@ router.put(
   authMiddleware,
   update
 );
+router.put("/links/click-count", clickCount)
 
 router.delete("/link/:slug", requireSignin, authMiddleware, remove);
 
