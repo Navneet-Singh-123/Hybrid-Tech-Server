@@ -5,8 +5,6 @@ exports.create = async (req, res) => {
   const { title, url, categories, type, medium } = req.body;
   let link = new Link({ title, url, categories, type, medium });
   link.postedBy = req.user._id;
-  let categoriesArray = categories && categories.split(",");
-  link.categories = categoriesArray;
   try {
     const data = await link.save();
     return res.json(data);
