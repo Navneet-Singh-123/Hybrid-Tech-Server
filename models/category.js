@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { ObjectId } = mongoose.Schema;
 
 const categorySchema = new mongoose.Schema(
   {
@@ -10,8 +11,8 @@ const categorySchema = new mongoose.Schema(
     },
     slug: {
       type: String,
-      unique: true,
       lowercase: true,
+      unique: true,
       index: true,
     },
     image: {
@@ -21,10 +22,10 @@ const categorySchema = new mongoose.Schema(
     content: {
       type: {},
       min: 20,
-      max: 2000,
+      max: 2000000,
     },
     postedBy: {
-      type: mongoose.Types.ObjectId,
+      type: ObjectId,
       ref: "User",
     },
   },

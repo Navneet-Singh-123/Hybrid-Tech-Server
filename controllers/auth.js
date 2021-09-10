@@ -1,5 +1,6 @@
 const AWS = require("aws-sdk");
 const User = require("../models/user");
+const Link = require('../models/link')
 const jwt = require("jsonwebtoken");
 const {
   registerEmailParams,
@@ -53,46 +54,48 @@ exports.register = async (req, res) => {
     });
 };
 
-exports.registerActivate = (req, res) => {
+exports.registerActivate = async (req, res) => {
   const { token } = req.body;
-  jwt.verify(
-    token,
-    process.env.JWT_ACCOUNT_ACTIVATION,
-    function (err, decoded) {
-      if (err) {
-        return res.status(401).json({
-          error: "Link is expired, please try again",
-        });
-      }
-      const { name, email, password } = jwt.decode(token);
-      const username = shortId.generate();
-      User.findOne({ email }).exec((err, user) => {
-        if (user) {
-          return res.status(401).json({
-            error: "User already exists with this email",
-          });
-        }
-        // Register new user
-        const newUser = new User({
-          username,
-          name,
-          email,
-          password,
-        });
-
-        newUser.save((err, result) => {
-          if (err) {
-            return res.status(401).json({
-              error: "Error saving user in the database, try later",
-            });
-          }
-          return res.json({
-            message: "Registration successful, please login",
-          });
-        });
+  var decoded;
+  try {
+    decoded = await jwt.verify(token, process.env.JWT_ACCOUNT_ACTIVATION);
+  } catch (err) {
+    if (err) {
+      return res.status(401).json({
+        error: "Link is expired, please try again",
       });
     }
-  );
+  }
+  console.log(decoded.name);
+  const name = decoded.name;
+  const email = decoded.email;
+  const password = decoded.password;
+  // const { name, email, password } = { decoded };
+
+  const user = await User.findOne({ email });
+  if (user) {
+    return res.status(401).json({
+      error: "User already exists with this email",
+    });
+  }
+  // Register new user
+  const newUser = new User({
+    name,
+    email,
+    password,
+  });
+  try {
+    console.log(newUser);
+    await newUser.save();
+  } catch (err) {
+    console.log(err);
+    return res.status(401).json({
+      error: "Error saving user in the database, try later",
+    });
+  }
+  return res.json({
+    message: "Registration successful, please login",
+  });
 };
 
 exports.login = async (req, res) => {
@@ -232,4 +235,23 @@ exports.resetPassword = (req, res) => {
       }
     );
   }
+};
+
+exports.canUpdateDeleteLink = (req, res, next) => {
+  const { id } = req.params;
+  Link.findOne({ _id: id }).exec((err, data) => {
+    if (err) {
+      return res.status(400).json({
+        error: "Could not find link",
+      });
+    }
+    let authorizedUser =
+      data.postedBy._id.toString() === req.user._id.toString();
+    if (!authorizedUser) {
+      return res.status(400).json({
+        error: "You are not authorized",
+      });
+    }
+    next();
+  });
 };

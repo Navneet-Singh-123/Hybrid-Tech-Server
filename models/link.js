@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { ObjectId } = mongoose.Schema;
 
 const linkSchema = new mongoose.Schema(
   {
@@ -12,14 +13,21 @@ const linkSchema = new mongoose.Schema(
       type: String,
       trim: true,
       required: true,
+      max: 256,
+    },
+    slug: {
+      type: String,
+      lowercase: true,
+      required: true,
+      index: true,
     },
     postedBy: {
-      type: mongoose.Types.ObjectId,
+      type: ObjectId,
       ref: "User",
     },
     categories: [
       {
-        type: mongoose.Types.ObjectId,
+        type: ObjectId,
         ref: "Category",
         required: true,
       },
@@ -32,10 +40,7 @@ const linkSchema = new mongoose.Schema(
       type: String,
       default: "Video",
     },
-    views: {
-      type: Number,
-      default: 0,
-    },
+    clicks: { type: Number, default: 0 },
   },
   { timestamps: true }
 );

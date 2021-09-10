@@ -78,8 +78,9 @@ exports.list = async (req, res) => {
 exports.read = async (req, res) => {
   const { slug } = req.params;
   let { limit, skip } = req.query;
+  initlimit = limit;
   console.log("Limit: ", limit, "Skip: ", skip);
-  limit = limit ? parseInt(limit) : 3;
+  limit = limit ? parseInt(limit) : 2;
   skip = skip ? parseInt(skip) : 0;
 
   let category, links;
@@ -94,12 +95,19 @@ exports.read = async (req, res) => {
     });
   }
   try {
-    links = await Link.find({ categories: category })
-      .populate("postedBy", "name username")
-      .populate("categories", "name")
-      .sort({ createdAt: -1 })
-      .limit(limit)
-      .skip(skip);
+    if (initlimit === undefined) {
+      links = await Link.find({ categories: category })
+        .populate("postedBy", "name username")
+        .populate("categories", "name")
+        .sort({ createdAt: -1 });
+    } else {
+      links = await Link.find({ categories: category })
+        .populate("postedBy", "name username")
+        .populate("categories", "name")
+        .sort({ createdAt: -1 })
+        .limit(limit)
+        .skip(skip);
+    }
   } catch (error) {
     return res.status(400).json({
       error: "Could not load links for this category",
@@ -110,12 +118,7 @@ exports.read = async (req, res) => {
 
 exports.update = async (req, res) => {
   const { slug } = req.params;
-  const { name, image, content } = req.body;
-  const base64Data = new Buffer.from(
-    image.replace(/^data:image\/\w+;base64,/, ""),
-    "base64"
-  );
-  const type = image.split(";")[0].split("/")[1];
+  const { name, content } = req.body;
   let updated;
   try {
     updated = await Category.findOneAndUpdate(
