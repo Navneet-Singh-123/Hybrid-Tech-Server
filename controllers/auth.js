@@ -1,6 +1,6 @@
 const AWS = require("aws-sdk");
 const User = require("../models/user");
-const Link = require('../models/link')
+const Link = require("../models/link");
 const jwt = require("jsonwebtoken");
 const {
   registerEmailParams,
@@ -21,7 +21,7 @@ const ses = new AWS.SES({
 });
 
 exports.register = async (req, res) => {
-  const { name, email, password } = req.body;
+  const { name, email, password, categories } = req.body;
   const user = await User.findOne({ email });
   if (user) {
     return res.status(400).json({
@@ -30,7 +30,7 @@ exports.register = async (req, res) => {
   }
   // Generate jwt token
   const token = jwt.sign(
-    { name, email, password },
+    { name, email, password, categories},
     process.env.JWT_ACCOUNT_ACTIVATION,
     {
       expiresIn: "10m",
@@ -70,6 +70,7 @@ exports.registerActivate = async (req, res) => {
   const name = decoded.name;
   const email = decoded.email;
   const password = decoded.password;
+  const categories = decoded.categories
   // const { name, email, password } = { decoded };
 
   const user = await User.findOne({ email });
@@ -83,6 +84,7 @@ exports.registerActivate = async (req, res) => {
     name,
     email,
     password,
+    categories
   });
   try {
     console.log(newUser);
