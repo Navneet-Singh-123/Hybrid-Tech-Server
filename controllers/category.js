@@ -74,7 +74,7 @@ exports.list = async (req, res) => {
     });
   }
 };
-
+   
 exports.read = async (req, res) => {
   const { slug } = req.params;
   let { limit, skip } = req.query;

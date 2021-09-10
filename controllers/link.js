@@ -1,42 +1,43 @@
 const Link = require("../models/link");
 const slugify = require("slugify");
 
-exports.create = (req, res) => {
+exports.create = async (req, res) => {
   const { title, url, categories, type, medium } = req.body;
   // console.table({ title, url, categories, type, medium });
   const slug = url;
   let link = new Link({ title, url, categories, type, medium, slug });
   // posted by user
   link.postedBy = req.user._id;
-  // save link
-  link.save((err, data) => {
-    if (err) {
-      return res.status(400).json({
-        error: "Link already exist",
-      });
-    }
+
+  try {
+    const data = await link.save();
     res.json(data);
-  });
+  } catch (error) {
+    return res.status(400).json({
+      error: "Link already exist",
+    });
+  }
 };
 
-exports.list = (req, res) => {
-  let limit = req.body.limit ? parseInt(req.body.limit) : 10;
-  let skip = req.body.skip ? parseInt(req.body.skip) : 0;
+exports.list = async (req, res) => {
+  let { limit, skip } = req.query;
+  console.log("Limit: ", limit, "Skip: ", skip);
+  limit = limit ? parseInt(limit) : 10;
+  skip = skip ? parseInt(skip) : 0;
 
-  Link.find({})
-    .populate("postedBy", "name")
-    .populate("categories", "name slug")
-    .sort({ createdAt: -1 })
-    .skip(skip)
-    .limit(limit)
-    .exec((err, data) => {
-      if (err) {
-        return res.status(400).json({
-          error: "Could not list links",
-        });
-      }
-      res.json(data);
+  try {
+    const data = await Link.find({})
+      .populate("postedBy", "name")
+      .populate("categories", "name slug")
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(limit);
+    res.json(data);
+  } catch (error) {
+    return res.status(400).json({
+      error: "Could not list links",
     });
+  }
 };
 
 exports.read = async (req, res) => {
@@ -81,19 +82,18 @@ exports.remove = async (req, res) => {
   }
 };
 
-exports.clickCount = (req, res) => {
+exports.clickCount = async (req, res) => {
   const { linkId } = req.body;
-  Link.findByIdAndUpdate(
-    linkId,
-    { $inc: { clicks: 1 } },
-    { upsert: true, new: true }
-  ).exec((err, result) => {
-    if (err) {
-      console.log(err);
-      return res.status(400).json({
-        error: "Could not update view count",
-      });
-    }
+  try {
+    const result = await Link.findByIdAndUpdate(
+      linkId,
+      { $inc: { clicks: 1 } },
+      { upsert: true, new: true }
+    );
     res.json(result);
-  });
+  } catch (error) {
+    return res.status(400).json({
+      error: "Could not update view count",
+    });
+  }
 };
