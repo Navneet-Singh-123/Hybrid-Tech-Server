@@ -1,5 +1,19 @@
 const Link = require("../models/link");
 const slugify = require("slugify");
+const Category = require("../models/category");
+const User = require("../models/user");
+const { linkPublishedParams } = require("../helpers/email");
+const AWS = require("aws-sdk");
+
+AWS.config.update({
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+  region: process.env.AWS_REGION,
+});
+
+const ses = new AWS.SES({
+  apiVersion: "2010-12-01",
+});
 
 exports.create = async (req, res) => {
   const { title, url, categories, type, medium } = req.body;
@@ -8,14 +22,42 @@ exports.create = async (req, res) => {
   let link = new Link({ title, url, categories, type, medium, slug });
   // posted by user
   link.postedBy = req.user._id;
-
+  var data, users;
   try {
-    const data = await link.save();
+    data = await link.save();
     res.json(data);
   } catch (error) {
     return res.status(400).json({
       error: "Link already exist",
     });
+  }
+
+  try {
+    users = await User.find({ categories: { $in: categories } });
+  } catch (error) {
+    console.log("Error finding users to send email on link publish");
+    throw new Error(error);
+  }
+
+  try {
+    const result = await Category.find({ _id: { $in: categories } });
+    data.categories = result;
+  } catch (error) {
+    console.log("Error finding categories to send email on link publish");
+  }
+
+  for (let i = 0; i < users.length; i++) {
+    const params = linkPublishedParams(users[i].email, data);
+    const sendEmail = ses.sendEmail(params).promise();
+    sendEmail
+      .then((success) => {
+        console.log("Email submitted through SES: ", success);
+        return;
+      })
+      .catch((failure) => {
+        console.log("Error on email submitted through SES: ", failure);
+        return;
+      });
   }
 };
 
