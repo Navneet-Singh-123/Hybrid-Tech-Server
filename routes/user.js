@@ -9,10 +9,21 @@ const {
 } = require("../controllers/auth");
 
 // import controllers
-const { read } = require("../controllers/user");
+const { read, update } = require("../controllers/user");
+const { userUpdateValidator } = require("../validators/auth");
+const { runValidation } = require("../validators");
 
 // routes
 router.get("/user", requireSignin, authMiddleware, read);
 router.get("/admin", requireSignin, adminMiddleware, read);
+
+router.put(
+  "/user",
+  userUpdateValidator,
+  runValidation,
+  requireSignin,
+  authMiddleware,
+  update
+);
 
 module.exports = router;

@@ -24,3 +24,21 @@ exports.read = (req, res) => {
       });
   });
 };
+
+exports.update = async (req, res) => {
+  const { name, categories } = req.body;
+  try {
+    const user = await User.findOneAndUpdate(
+      { _id: req.user._id },
+      { name, categories },
+      { new: true }
+    );
+    user.hashed_password = undefined;
+    user.salt = undefined;
+    return res.json(user);
+  } catch (error) {
+    return res.status(400).json({
+      error: "Could not find user to update",
+    });
+  }
+};
