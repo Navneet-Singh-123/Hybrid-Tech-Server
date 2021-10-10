@@ -139,3 +139,42 @@ exports.clickCount = async (req, res) => {
     });
   }
 };
+
+exports.popular = async (req, res) => {
+  console.log("called");
+
+  try {
+    const links = await Link.find()
+      .populate("postedBy", "name")
+      .sort({ clicks: -1 })
+      .limit(3);
+    return res.json(links);
+  } catch (error) {
+    return res.status(400).json({
+      error: "Links not found",
+    });
+  }
+};
+
+exports.popularInCategory = async (req, res) => {
+  const { slug } = req.params;
+  console.log(slug);
+  var category, links;
+  try {
+    category = await Category.findOne({ slug });
+  } catch (error) {
+    return res.status(400).json({
+      error: "Could not load categories",
+    });
+  }
+  try {
+    links = await Link.find({ categories: category })
+      .sort({ clicks: -1 })
+      .limit(3);
+  } catch (error) {
+    return res.status(400).json({
+      error: "Links not found",
+    });
+  }
+  res.json(links);
+};
