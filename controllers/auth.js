@@ -6,7 +6,6 @@ const {
   registerEmailParams,
   forgotPasswordEmailParams,
 } = require("../helpers/email");
-const shortId = require("shortid");
 const expressJwt = require("express-jwt");
 const _ = require("lodash");
 
@@ -30,7 +29,7 @@ exports.register = async (req, res) => {
   }
   // Generate jwt token
   const token = jwt.sign(
-    { name, email, password, categories},
+    { name, email, password, categories },
     process.env.JWT_ACCOUNT_ACTIVATION,
     {
       expiresIn: "10m",
@@ -70,7 +69,7 @@ exports.registerActivate = async (req, res) => {
   const name = decoded.name;
   const email = decoded.email;
   const password = decoded.password;
-  const categories = decoded.categories
+  const categories = decoded.categories;
   // const { name, email, password } = { decoded };
 
   const user = await User.findOne({ email });
@@ -84,7 +83,7 @@ exports.registerActivate = async (req, res) => {
     name,
     email,
     password,
-    categories
+    categories,
   });
   try {
     console.log(newUser);
@@ -178,6 +177,7 @@ exports.forgotPassword = async (req, res) => {
         error: "Password reset failed, try later",
       });
     }
+
     const sendEmail = ses.sendEmail(params).promise();
     sendEmail
       .then((data) => {
@@ -221,6 +221,7 @@ exports.resetPassword = (req, res) => {
           resetPasswordLink: "",
         };
 
+        // https://www.geeksforgeeks.org/underscore-js-_-extend-function/
         user = _.extend(user, updatedFields);
 
         try {

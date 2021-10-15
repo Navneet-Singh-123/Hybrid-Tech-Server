@@ -141,11 +141,11 @@ exports.clickCount = async (req, res) => {
 };
 
 exports.popular = async (req, res) => {
-  console.log("called");
 
   try {
     const links = await Link.find()
       .populate("postedBy", "name")
+      .populate("categories", "name")
       .sort({ clicks: -1 })
       .limit(3);
     return res.json(links);
@@ -169,6 +169,7 @@ exports.popularInCategory = async (req, res) => {
   }
   try {
     links = await Link.find({ categories: category })
+      .populate("postedBy", "name")
       .sort({ clicks: -1 })
       .limit(3);
   } catch (error) {

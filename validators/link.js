@@ -5,7 +5,7 @@ exports.linkCreateValidator = [
   check("url").not().isEmpty().withMessage("URL is required"),
   check("categories").not().isEmpty().withMessage("Pick a category"),
   check("type").not().isEmpty().withMessage("Pick a type free/paid"),
-  check("medium").not().isEmpty().withMessage("Pick a medium video/book"),
+  check("medium").not().isEmpty().withMessage("Pick a medium video/article"),
 ];
 
 exports.linkUpdateValidator = [
@@ -13,5 +13,5 @@ exports.linkUpdateValidator = [
   check("url").not().isEmpty().withMessage("URL is required"),
   check("categories").not().isEmpty().withMessage("Pick a category"),
   check("type").not().isEmpty().withMessage("Pick a type free/paid"),
-  check("medium").not().isEmpty().withMessage("Pick a medium video/book"),
+  check("medium").not().isEmpty().withMessage("Pick a medium video/article"),
 ];

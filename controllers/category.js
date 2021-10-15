@@ -74,7 +74,7 @@ exports.list = async (req, res) => {
     });
   }
 };
-   
+
 exports.read = async (req, res) => {
   const { slug } = req.params;
   let { limit, skip } = req.query;
@@ -188,7 +188,9 @@ exports.remove = async (req, res) => {
   try {
     console.log(slug);
     const deleted = await Category.findOneAndRemove({ slug });
-    console.log(deleted);
+
+    // Todo: Remove links ones its categeory is removed and is associated with no category
+
     const deleteParams = {
       Bucket: "hybrid-tech",
       Key: `${deleted.image.key}`,
