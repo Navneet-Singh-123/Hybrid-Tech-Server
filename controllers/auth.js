@@ -70,7 +70,6 @@ exports.registerActivate = async (req, res) => {
   const email = decoded.email;
   const password = decoded.password;
   const categories = decoded.categories;
-  // const { name, email, password } = { decoded };
 
   const user = await User.findOne({ email });
   if (user) {
@@ -221,7 +220,6 @@ exports.resetPassword = (req, res) => {
           resetPasswordLink: "",
         };
 
-        // https://www.geeksforgeeks.org/underscore-js-_-extend-function/
         user = _.extend(user, updatedFields);
 
         try {

@@ -1,14 +1,16 @@
 const express = require("express");
 const router = express.Router();
 
-// validators
+// Import validators
+
 const {
   linkCreateValidator,
   linkUpdateValidator,
 } = require("../validators/link");
 const { runValidation } = require("../validators");
 
-// controllers
+// Import from controllers
+
 const {
   requireSignin,
   authMiddleware,
@@ -26,7 +28,8 @@ const {
   popularInCategory,
 } = require("../controllers/link");
 
-// routes
+// Routes
+
 router.post(
   "/link",
   linkCreateValidator,
@@ -37,12 +40,11 @@ router.post(
 );
 
 router.get("/links", requireSignin, adminMiddleware, list);
-
-router.put("/click-count", clickCount);
 router.get("/link/popular", popular);
 router.get("/link/popular/:slug", popularInCategory);
 router.get("/link/:id", read);
 
+router.put("/click-count", clickCount);
 router.put(
   "/link/:id",
   linkUpdateValidator,
@@ -60,6 +62,7 @@ router.put(
   adminMiddleware,
   update
 );
+
 router.delete(
   "/link/:id",
   requireSignin,

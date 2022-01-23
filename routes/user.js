@@ -1,19 +1,22 @@
 const express = require("express");
 const router = express.Router();
 
-// import middlewares
+// Import validators
+
+const { userUpdateValidator } = require("../validators/auth");
+const { runValidation } = require("../validators");
+
+// Import from controllers
+
 const {
   requireSignin,
   authMiddleware,
   adminMiddleware,
 } = require("../controllers/auth");
-
-// import controllers
 const { read, update } = require("../controllers/user");
-const { userUpdateValidator } = require("../validators/auth");
-const { runValidation } = require("../validators");
 
-// routes
+// Routes
+
 router.get("/user", requireSignin, authMiddleware, read);
 router.get("/admin", requireSignin, adminMiddleware, read);
 

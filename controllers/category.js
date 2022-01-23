@@ -133,54 +133,6 @@ exports.update = async (req, res) => {
   }
   console.log("Updated: ", updated);
   res.json(updated);
-  //   if (image) {
-  //     // remove the existing from s3 before uploading the updated one
-  //     const deleteParams = {
-  //       Bucket: "hybrid-tech",
-  //       Key: `${updated.image.key}`,
-  //     };
-  //     s3.deleteObject(deleteParams, (err, data) => {
-  //       if (err) {
-  //         console.log("s3 delete error during update: ", err);
-  //       } else {
-  //         console.log("s3 deleted during update", data);
-  //       }
-  //     });
-  //     // uploading the new image
-  //     const params = {
-  //       Bucket: "hybrid-tech",
-  //       Key: `category/${uuidv4()}.${type}`,
-  //       Body: base64Data,
-  //       ACL: "public-read",
-  //       ContentType: `image/${type}`,
-  //       ContentEncoding: "base64",
-  //     };
-  //     s3.upload(params, async (err, data) => {
-  //       if (err) {
-  //         console.log(err);
-  //         return res.status(400).json({
-  //           error: "Upload to s3 failed",
-  //         });
-  //       }
-  //       console.log("AWS data: ", data);
-  //       updated.image.url = data.Location;
-  //       updated.image.key = data.Key;
-  //       updated.postedBy = req.user._id;
-
-  //       // Save to db
-  //       try {
-  //         const savedCategory = await updated.save();
-  //         return res.json(savedCategory);
-  //       } catch (error) {
-  //         console.log(error);
-  //         return res.status(400).json({
-  //           error: "Error saving image to the database, category already exists",
-  //         });
-  //       }
-  //     });
-  //   } else {
-
-  //   }
 };
 
 exports.remove = async (req, res) => {
