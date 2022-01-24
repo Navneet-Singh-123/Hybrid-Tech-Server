@@ -1,10 +1,10 @@
 [![Visits Badge](https://badges.pufler.dev/visits/Navneet-Singh-123/Hybrid-Tech-Server)](https://badges.pufler.dev) [![Created Badge](https://badges.pufler.dev/created/Navneet-Singh-123/Hybrid-Tech-Server)](https://badges.pufler.dev) [![Updated Badge](https://badges.pufler.dev/updated/Navneet-Singh-123/Hybrid-Tech-Server)](https://badges.pufler.dev)
 
-# [Hybrid Tech](http://ec2-13-233-84-81.ap-south-1.compute.amazonaws.com/)
+# :eyes: [Hybrid Tech](http://ec2-13-233-84-81.ap-south-1.compute.amazonaws.com/)
 
 [![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/made-with-javascript.svg)](https://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/uses-html.svg)](https://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/uses-css.svg)](https://forthebadge.com)
 
-## Table of Contents
+## :pushpin: Table of Contents
 
 - [About the Project](#about-the-project)
   - [Built With](#built-with)
@@ -32,12 +32,30 @@ Users can browse through a variety of trending topics and submit links to share 
 - NextJS
 - NodeJS
 
-### Installation
+### :construction_worker: Installation
 
 - Server dependencies
 
+1. Install project dependencies
+
 ```bash
   yarn install or npm install
+```
+
+2. Add environment variables in your `.env`
+
+```env
+  DATABASE_CLOUD=
+  PORT=
+  CLIENT_URL=
+  AWS_ACCESS_KEY_ID=
+  AWS_SECRET_ACCESS_KEY=
+  AWS_REGION=
+  EMAIL_FROM=
+  EMAIL_TO=
+  JWT_SECRET=
+  JWT_ACCOUNT_ACTIVATION=
+  JWT_RESET_PASSWORD=
 ```
 
 - Client dependencies
@@ -66,6 +84,6 @@ Users can browse through a variety of trending topics and submit links to share 
 
 [Back to Table of Contents](#table-of-contents)
 
-## License
+## :closed_book: License
 
 Licensed under the [MIT License](LICENSE)
