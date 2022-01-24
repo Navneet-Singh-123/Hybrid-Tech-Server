@@ -8,6 +8,9 @@
 
 - [About the Project](#about-the-project)
   - [Built With](#built-with)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
 - [License](#license)
 
 ## About the Project
@@ -19,6 +22,47 @@ Users can browse through a variety of trending topics and submit links to share 
 ### Built With
 
 - MERN + NextJS + AWS Deployment
+
+[Back to Table of Contents](#table-of-contents)
+
+## Getting Started
+
+### Prerequisites
+
+- NextJS
+- NodeJS
+
+### Installation
+
+- Server dependencies
+
+```bash
+  yarn install or npm install
+```
+
+- Client dependencies
+
+1. Install project dependencies
+
+```bash
+  yarn install or npm install
+```
+
+2. Define public runtime configurations in your `next.config.js`
+
+```env
+  APP_NAME=
+  API=
+  PRODUCTION=
+  DOMAIN=
+  FB_APP_ID=
+```
+
+3. Start the development server
+
+```bash
+  yarn dev or npm run dev
+```
 
 [Back to Table of Contents](#table-of-contents)
 
