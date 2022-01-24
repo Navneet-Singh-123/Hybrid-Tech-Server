@@ -1,4 +1,4 @@
-[![Visits Badge](https://badges.pufler.dev/visits/Navneet-Singh-123/Team-Connect)](https://badges.pufler.dev) [![Created Badge](https://badges.pufler.dev/created/Navneet-Singh-123/Team-Connect)](https://badges.pufler.dev) [![Updated Badge](https://badges.pufler.dev/updated/Navneet-Singh-123/Team-Connect)](https://badges.pufler.dev)
+[![Visits Badge](https://badges.pufler.dev/visits/Navneet-Singh-123/Hybrid-Tech-Server)](https://badges.pufler.dev) [![Created Badge](https://badges.pufler.dev/created/Navneet-Singh-123/Hybrid-Tech-Server)](https://badges.pufler.dev) [![Updated Badge](https://badges.pufler.dev/updated/Navneet-Singh-123/Hybrid-Tech-Server)](https://badges.pufler.dev)
 
 # [Hybrid Tech](http://ec2-13-233-84-81.ap-south-1.compute.amazonaws.com/)
 
