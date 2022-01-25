@@ -32,7 +32,7 @@ Users can browse through a variety of trending topics and submit links to share 
 - NextJS
 - NodeJS
 
-### :construction_worker: Installation
+### Installation
 
 - Server dependencies
 
@@ -87,3 +87,5 @@ Users can browse through a variety of trending topics and submit links to share 
 ## :closed_book: License
 
 Licensed under the [MIT License](LICENSE)
+
+Made with love by [Navneet Singh](https://github.com/Navneet-Singh-123) 🚀
