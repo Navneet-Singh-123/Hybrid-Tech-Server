@@ -13,6 +13,7 @@
   - [Installation](#installation)
 - [Libraries & Frameworks](#libraries--frameworks)
 - [Features](#features)
+- [Found a bug? Missing a specific feature?](#issues)
 - [License](#license)
 
 ## About the Project
@@ -109,6 +110,10 @@ Users can browse through a variety of trending topics and submit links to share 
 - AWS EC2 for hosting the application in the cloud
 
 [Back to Table of Contents](#table-of-contents)
+
+## Issues
+
+Feel free to **file a new issue** with a respective title and description on the [Hybrid Tech Server](https://github.com/Navneet-Singh-123/Hybrid-Tech-Server) repository. If you already found a solution to your problem, **I would love to review your pull request**!
 
 ## :closed_book: License
 
