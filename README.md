@@ -12,6 +12,7 @@
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
 - [Libraries & Frameworks](#libraries--frameworks)
+- [Features](#features)
 - [License](#license)
 
 ## About the Project
@@ -93,6 +94,21 @@ Users can browse through a variety of trending topics and submit links to share 
 | [ReactJS](https://reactjs.org/)     | A JavaScript library for building user interfaces            |
 | [NodeJS](https://nodejs.org/en/)    | An open source server environment that uses JS on the server |
 | [Mongoose](https://mongoosejs.com/) | Elegant mongodb object modeling for node.js                  |
+
+## Features
+
+    * JWT based Authentication
+    * User login, register, account activation, forgot and reset password
+    * Implementing rich text editor
+    * Infinite scroll
+    * CRUD on user, links and categories
+    * AWS S3 for uploading files
+    * Mongo atlas as a managed database in the cloud
+    * Mass emailing
+    * Resizing images client side
+    * AWS EC2 for hosting the application in the cloud
+
+[Back to Table of Contents](#table-of-contents)
 
 ## :closed_book: License
 
