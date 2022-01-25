@@ -11,6 +11,7 @@
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
+- [Libraries & Frameworks](#libraries--frameworks)
 - [License](#license)
 
 ## About the Project
@@ -83,6 +84,15 @@ Users can browse through a variety of trending topics and submit links to share 
 ```
 
 [Back to Table of Contents](#table-of-contents)
+
+## Libraries & Frameworks
+
+| Name                                | Description                                                  |
+| ----------------------------------- | ------------------------------------------------------------ |
+| [NextJS](https://nextjs.org/)       | The React Framework for Production                           |
+| [ReactJS](https://reactjs.org/)     | A JavaScript library for building user interfaces            |
+| [NodeJS](https://nodejs.org/en/)    | An open source server environment that uses JS on the server |
+| [Mongoose](https://mongoosejs.com/) | Elegant mongodb object modeling for node.js                  |
 
 ## :closed_book: License
 
