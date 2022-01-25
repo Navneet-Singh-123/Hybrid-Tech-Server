@@ -97,16 +97,16 @@ Users can browse through a variety of trending topics and submit links to share 
 
 ## Features
 
-    * JWT based Authentication
-    * User login, register, account activation, forgot and reset password
-    * Implementing rich text editor
-    * Infinite scroll
-    * CRUD on user, links and categories
-    * AWS S3 for uploading files
-    * Mongo atlas as a managed database in the cloud
-    * Mass emailing
-    * Resizing images client side
-    * AWS EC2 for hosting the application in the cloud
+- JWT based Authentication
+- User login, register, account activation, forgot and reset password
+- Implementing rich text editor
+- Infinite scroll
+- CRUD on user, links and categories
+- AWS S3 for uploading files
+- Mongo atlas as a managed database in the cloud
+- Mass emailing
+- Resizing images client side
+- AWS EC2 for hosting the application in the cloud
 
 [Back to Table of Contents](#table-of-contents)
 
