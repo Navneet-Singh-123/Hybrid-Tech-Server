@@ -13,6 +13,7 @@
   - [Installation](#installation)
 - [Libraries & Frameworks](#libraries--frameworks)
 - [Features](#features)
+- [Screenshots](#screenshots)
 - [Found a bug? Missing a specific feature?](#issues)
 - [Contributing](#contributing)
 - [License](#license)
@@ -111,6 +112,11 @@ Users can browse through a variety of trending topics and submit links to share 
 - AWS EC2 for hosting the application in the cloud
 
 [Back to Table of Contents](#table-of-contents)
+
+## Screenshots
+
+![alt text](screenshots/Home.png)
+
 
 ## Issues
 
