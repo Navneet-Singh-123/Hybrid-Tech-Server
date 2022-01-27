@@ -121,6 +121,8 @@ Users can browse through a variety of trending topics and submit links to share 
 ![alt text](screenshots/UserDashboard.png)
 ![alt text](screenshots/AdminDashboard.png)
 
+[Back to Table of Contents](#table-of-contents)
+
 ## Issues
 
 Feel free to **file a new issue** with a respective title and description on the [Hybrid Tech Server](https://github.com/Navneet-Singh-123/Hybrid-Tech-Server) repository. If you already found a solution to your problem, **I would love to review your pull request**!
