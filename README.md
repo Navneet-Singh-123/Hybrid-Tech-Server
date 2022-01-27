@@ -116,7 +116,10 @@ Users can browse through a variety of trending topics and submit links to share 
 ## Screenshots
 
 ![alt text](screenshots/Home.png)
-
+![alt text](screenshots/SingleCategory.png)
+![alt text](screenshots/SubmitLinkForm.png)
+![alt text](screenshots/UserDashboard.png)
+![alt text](screenshots/AdminDashboard.png)
 
 ## Issues
 
