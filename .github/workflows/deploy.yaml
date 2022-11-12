@@ -13,7 +13,6 @@ jobs:
     steps:
       - name: executing ssh commands remotely
         uses: appleboy/ssh-action@master
-        run: npm install pm2 -g
         with:
           host: ${{ secrets.AWS_HOST }}
           username: ${{ secrets.AWS_USER }}
