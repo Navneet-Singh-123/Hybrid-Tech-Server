@@ -11,6 +11,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Setting up Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
       - name: executing ssh commands remotely
         uses: appleboy/ssh-action@master
         with:
