@@ -22,4 +22,7 @@ jobs:
           host: ${{ secrets.AWS_HOST }}
           username: ${{ secrets.AWS_USER }}
           key: ${{ secrets.AWS_KEY }}
-          script: sh /home/ubuntu/server/deploy.sh
+          script: |
+            export NVM_DIR=~/.nvm
+            source ~/.nvm/nvm.sh    
+            sh /home/ubuntu/server/deploy.sh
