@@ -12,7 +12,7 @@ jobs:
 
     steps:
       - name: Install PM2
-        run: sudo npm intall pm2 -g
+        run: sudo npm install pm2 -g
 
       - name: executing ssh commands remotely
         uses: appleboy/ssh-action@master
