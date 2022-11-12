@@ -11,6 +11,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Install PM2
+        run: npm i pm2
+
       - name: executing ssh commands remotely
         uses: appleboy/ssh-action@master
         with:
