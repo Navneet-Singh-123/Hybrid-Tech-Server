@@ -10,4 +10,4 @@ git pull
 echo "Restart PM2 actions"
 cd /home/ubuntu/server
 pm2 start server.js
-pm2 save 
+pm2 save  
