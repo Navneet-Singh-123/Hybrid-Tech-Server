@@ -16,6 +16,9 @@ jobs:
         with:
           node-version: 16
 
+      - name: Installing pm2
+        run: npm install pm2@latest -g
+
       - name: executing ssh commands remotely
         uses: appleboy/ssh-action@master
         with:

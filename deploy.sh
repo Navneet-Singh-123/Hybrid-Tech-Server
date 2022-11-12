@@ -1,6 +1,3 @@
-echo "Installing pm2 globally"
-npm install pm2@latest -g
-
 echo "Kill the running PM2 action"
 sudo pm2 delete server
 
