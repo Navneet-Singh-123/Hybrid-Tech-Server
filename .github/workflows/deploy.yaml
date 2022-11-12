@@ -11,11 +11,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Install PM2
-        run: sudo npm install pm2 -g
-
       - name: executing ssh commands remotely
         uses: appleboy/ssh-action@master
+        run: npm install pm2 -g
         with:
           host: ${{ secrets.AWS_HOST }}
           username: ${{ secrets.AWS_USER }}
