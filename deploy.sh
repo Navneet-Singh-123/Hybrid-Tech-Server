@@ -1,5 +1,5 @@
 echo "Kill the running PM2 action"
-pm2 delete server
+sudo pm2 delete server
 
 echo "Jump to required folder"
 cd /home/ubuntu/server
@@ -9,5 +9,5 @@ git pull
 
 echo "Restart PM2 actions"
 cd /home/ubuntu/server
-pm2 start server.js
-pm2 save
+sudo pm2 start server.js
+sudo pm2 save
